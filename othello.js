@@ -11,5 +11,20 @@ class OthelloBoard {
       }
     }
   }
+
+  print() {
+  }
+
+  gen_moves() {
+  }
+
+  make_move() {
+  }
+
+  get_curplayer() {
+  }
+
+  final_score() {
+  }
 }
 console.log(new OthelloBoard)
