@@ -16,6 +16,15 @@ class OthelloBoard {
   }
 
   print() {
+    var board = document.getElementById("board");
+    var boardBody = "";
+    for (var i = 0; i < this.board.length; i++) {
+       for (var j = 0; j < this.board[0].length; j++) {
+         boardBody += this.board[i][j];
+       }
+       boardBody += "<br>";
+    }
+    board.innerHTML = boardBody;
   }
 
   gen_moves() {
