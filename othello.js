@@ -1,5 +1,4 @@
-console.log("Othello");
-document.body.innerHTML += "<br>boo<br>moof"
+
 
 const BLACK = 1;
 const WHITE = -1;
@@ -32,4 +31,3 @@ class OthelloBoard {
   final_score() {
   }
 }
-console.log(new OthelloBoard)
