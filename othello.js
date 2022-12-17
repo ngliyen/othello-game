@@ -28,6 +28,14 @@ class OthelloBoard {
     return this.curplayer;
   }
 
-  final_score() {
+  final_score(player) {
+    console.assert(player == BLACK || player == WHITE)
+    count = 0;
+    for (var i = 0; i< 8; ++i) {
+      for (var j = 0; j< 8; ++j) {
+        count += this.board[i][j]==player
+      }
+    }
+    return count;
   }
 }
