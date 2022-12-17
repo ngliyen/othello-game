@@ -26,10 +26,10 @@ class OthelloBoard {
   }
 
   get_curplayer() {
+    return this.curplayer;
   }
 
   final_score() {
-    return this.curplayer;
   }
 }
 console.log(new OthelloBoard)
