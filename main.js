@@ -1,5 +1,4 @@
-console.log("Othello");
-document.body.innerHTML += "<br>boo<br>moof"
+var board = new OthelloBoard();
 
-
-console.log(new OthelloBoard);
+console.log(board);
+board.print();
