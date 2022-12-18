@@ -18,8 +18,10 @@ function handleMouseDown(e){
   
   if (squareX >= 0 && squareX < BOARDSIZE && squareY >= 0 && squareY < BOARDSIZE) {
     // TODO: SIMULATE MAKING A MOVE
-    board.board[squareX][squareY] = board.curplayer;
-    board.print();
+//    board.board[squareX][squareY] = board.curplayer;
+
+    board.make_move(board.curplayer, squareX, squareY)
+    board.print()
   }
 }
 

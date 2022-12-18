@@ -50,36 +50,48 @@ class OthelloBoard {
     var num_cols = this.board[0].length
     this.board[i][j] = player
     var dir_arr = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]]
-    for (dir in dir_arr) {
-        var end_row = i + dir[0]
-        var end_col = j + dir[1]
+    for (let idx=0; idx<dir_arr.length; idx++) {
+        var dir = dir_arr[idx]
+        var end_col = i + dir[0]
+        var end_row = j + dir[1]
         var player_found = false
-        while (end_row < num_rows && end_col < num_cols && !player_found) {
-            if (this.board[end_row][end_col] == player) {
+        while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+            if (this.board[end_col][end_row] == player) {
                 player_found = true
+            } else if (this.board[end_col][end_row] == EMPTY) {
+                break
             }
             else {
-                end_row += dir[0]
-                end_col += dir[1]
+                end_col += dir[0]
+                end_row += dir[1]
             }
+            console.log("While loop: " + end_row + ", " + end_col)
         }
         if (player_found) {
-            console.log("end: " + end_row + ", " + end_col )
-            this.update_board(i, end_row, j, end_col, dir)
+            console.log("Player found! end: " + end_row + ", " + end_col + "dir= " + dir)
+            this.update_board(j, i, dir)
         }
         player_found = false
     }
-
-
+    this.curplayer = -this.curplayer
   }
 
-  update_board(start_row, end_row, start_col, end_col, dir_tuple) {
-    var row = start_row
-    var col = start_col
-    while (row <= end_row && col <= end_col) {
-        this.board[row][col] = this.curplayer
-        row += dir_tuple[0]
-        col += dir_tuple[1]
+  update_board(start_row, start_col, dir) {
+    var num_rows = this.board.length
+    var num_cols = this.board[0].length
+    var end_col = start_col + dir[0]
+    var end_row = start_row + dir[1]
+    var player_found = false
+    while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+        if (this.board[end_col][end_row] == this.curplayer) {
+            player_found = true
+        }
+        else {
+            this.board[end_col][end_row] = this.curplayer
+            end_col += dir[0]
+            end_row += dir[1]
+        }
+        console.log("While loop: " + end_row + ", " + end_col)
     }
   }
 
