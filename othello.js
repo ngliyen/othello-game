@@ -3,7 +3,8 @@
 const BLACK = 1;
 const WHITE = -1;
 const EMPTY = 0;
-const BOARDSIZE = 8;
+var BOARDSIZE = 8;
+var SQUARESIZE = 30;
 class OthelloBoard {
   constructor() {
     this.board = new Array(BOARDSIZE);
@@ -21,7 +22,6 @@ class OthelloBoard {
   }
 
   print() {
-    const SQUARESIZE = 30;
     var canvas = document.getElementById("board");
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = 'green';
