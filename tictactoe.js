@@ -34,6 +34,18 @@ class TicTacToeBoard {
     board.innerHTML = boardBody;
   }
 
+  clone() {
+    var ret = new TicTacToeBoard();
+    ret.curplayer = this.curplayer;
+    ret.game_ended = this.game_ended;
+    for (var i = 0; i< 3; ++i) {
+      for (var j = 0; j< 3; ++j) {
+        ret.board[i][j] = this.board[i][j];
+      }
+    }
+    return ret;
+  }
+
   gen_moves() {
     let ret = new Array();
     if (this.game_ended != EMPTY) {
@@ -51,17 +63,17 @@ class TicTacToeBoard {
 
   has_line() {
     for (var i = 0; i < 3; ++i) {
-      if (this.board[0][i] == this.board[1][i] && this.board[1][i] == this.board[2][i]) {
+      if (this.board[0][i] != EMPTY && this.board[0][i] == this.board[1][i] && this.board[1][i] == this.board[2][i]) {
         return this.board[0][i]
       }
-      if (this.board[i][0] == this.board[i][1] && this.board[i][1] == this.board[i][2]) {
+      if (this.board[i][0] != EMPTY && this.board[i][0] == this.board[i][1] && this.board[i][1] == this.board[i][2]) {
         return this.board[i][0]
       }
     }
-    if (this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2] ) {
+    if (this.board[0][0] != EMPTY && this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2] ) {
       return this.board[1][1]
     }
-    if (this.board[2][0] == this.board[1][1] && this.board[1][1] == this.board[0][2] ) {
+    if (this.board[2][0] != EMPTY && this.board[2][0] == this.board[1][1] && this.board[1][1] == this.board[0][2] ) {
       return this.board[1][1]
     }
     return EMPTY;
