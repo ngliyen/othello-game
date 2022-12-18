@@ -16,7 +16,7 @@ function handleMouseDown(e){
   var squareY = Math.floor((mouseY-80) / SQUARESIZE); 
   //console.log(squareX + " " + squareY);
   
-  if (squareX > 0 && squareX < BOARDSIZE && squareY > 0 && squareY < BOARDSIZE) {
+  if (squareX >= 0 && squareX < BOARDSIZE && squareY >= 0 && squareY < BOARDSIZE) {
     // TODO: SIMULATE MAKING A MOVE
     board.board[squareX][squareY] = board.curplayer;
     board.print();
