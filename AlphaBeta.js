@@ -10,6 +10,13 @@ function alpha_beta(alpha, beta, depthLeft, board, first_level) {
     //console.log(score);
     return score;
   }
+  let m = JSON.stringify(board);
+  if (m in principal) {
+    moves.unshift(principal[m]);
+  }
+
+
+
   for (var i = 0;i < moves.length; ++i) {
     var move = moves[i];
     b = board.clone();
