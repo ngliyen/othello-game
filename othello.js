@@ -45,7 +45,42 @@ class OthelloBoard {
   gen_moves() {
   }
 
-  make_move() {
+  make_move(player, i, j) {
+    var num_rows = this.board.length
+    var num_cols = this.board[0].length
+    this.board[i][j] = player
+    var dir_arr = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]]
+    for (dir in dir_arr) {
+        var end_row = i + dir[0]
+        var end_col = j + dir[1]
+        var player_found = false
+        while (end_row < num_rows && end_col < num_cols && !player_found) {
+            if (this.board[end_row][end_col] == player) {
+                player_found = true
+            }
+            else {
+                end_row += dir[0]
+                end_col += dir[1]
+            }
+        }
+        if (player_found) {
+            console.log("end: " + end_row + ", " + end_col )
+            this.update_board(i, end_row, j, end_col, dir)
+        }
+        player_found = false
+    }
+
+
+  }
+
+  update_board(start_row, end_row, start_col, end_col, dir_tuple) {
+    var row = start_row
+    var col = start_col
+    while (row <= end_row && col <= end_col) {
+        this.board[row][col] = this.curplayer
+        row += dir_tuple[0]
+        col += dir_tuple[1]
+    }
   }
 
   get_curplayer() {
@@ -64,3 +99,11 @@ class OthelloBoard {
     return count;
   }
 }
+
+othello = new OthelloBoard
+othello.board[3][3] = BLACK
+othello.board[4][3] = WHITE
+othello.board[3][4] = WHITE
+othello.board[4][4] = BLACK
+othello.make_move(othello.curplayer, 4, 2)
+console.log(othello)
