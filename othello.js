@@ -42,19 +42,32 @@ class OthelloBoard {
     }
   }
 
-  gen_moves(player) {
+  clone() {
+    var ret = new OthelloBoard();
+    ret.curplayer = this.curplayer;
+    for (var i = 0; i< 8; ++i) {
+      for (var j = 0; j< 8; ++j) {
+        ret.board[i][j] = this.board[i][j];
+      }
+    }
+    return ret;
+  }
+
+
+  gen_moves() {
     var legal_moves = []
     // not valid if already filled
     for(let i=0; i<this.board[0].length; i++) {
         for(let j=0; j<this.board.length; j++) {
             if(this.board[i][j] == EMPTY) {
-                if(this.is_legal_move(player, i, j)) {
+                if(this.is_legal_move(this.curplayer, i, j)) {
                     legal_moves.push([i, j])
                 }
             }
         }
     }
-    console.log(legal_moves)
+    //console.log(legal_moves)
+    return legal_moves;
   }
 
   is_legal_move(player, i, j) {
@@ -96,8 +109,10 @@ class OthelloBoard {
     return false
   }
 
-  make_move(player, i, j) {
-    this.gen_moves(player)
+  make_move(move) {
+    var player = this.curplayer;
+    var i = move[0];
+    var j = move[1];
     var num_rows = this.board.length
     var num_cols = this.board[0].length
     this.board[i][j] = player
@@ -117,10 +132,8 @@ class OthelloBoard {
                 end_col += dir[0]
                 end_row += dir[1]
             }
-            console.log("While loop: " + end_row + ", " + end_col)
         }
         if (player_found) {
-            console.log("Player found! end: " + end_row + ", " + end_col + "dir= " + dir)
             this.update_board(j, i, dir)
         }
         player_found = false
@@ -149,10 +162,13 @@ class OthelloBoard {
   get_curplayer() {
     return this.curplayer;
   }
+  approx_score(player) {
+    return this.final_score(player);
+  }
 
   final_score(player) {
     console.assert(player == BLACK || player == WHITE)
-    count = 0;
+    var count = 0;
     for (var i = 0; i< 8; ++i) {
       for (var j = 0; j< 8; ++j) {
         count += this.board[i][j]==player
@@ -163,10 +179,10 @@ class OthelloBoard {
   }
 }
 
-othello = new OthelloBoard
-othello.board[3][3] = BLACK
-othello.board[4][3] = WHITE
-othello.board[3][4] = WHITE
-othello.board[4][4] = BLACK
-othello.make_move(othello.curplayer, 4, 2)
-console.log(othello)
+//othello = new OthelloBoard
+//othello.board[3][3] = BLACK
+//othello.board[4][3] = WHITE
+//othello.board[3][4] = WHITE
+//othello.board[4][4] = BLACK
+//othello.make_move(othello.curplayer, 4, 2)
+//console.log(othello)

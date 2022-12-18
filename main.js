@@ -20,10 +20,17 @@ function handleMouseDown(e){
     // TODO: SIMULATE MAKING A MOVE
 //    board.board[squareX][squareY] = board.curplayer;
 
-    board.make_move(board.curplayer, squareX, squareY)
+    board.make_move([squareX, squareY])
     board.print()
   }
 }
 
 canvas.addEventListener("mousedown", handleMouseDown, false);
 
+
+function ai_make_move() {
+  var bestmove = get_best_move(board, 10, 9);
+  console.log(bestmove);
+  board.make_move(bestmove);
+  board.print();
+}

@@ -57,12 +57,13 @@ function get_best_move(board, timeoutsec, max_depth) {
   var startingDepth = 4;
 
   while (new Date().getTime() <= endTime) {
-    alpha_beta(-10000,10000, startingDepth, board,true);
+    alpha_beta(-10000,10000, startingDepth, board,false);
     if (startingDepth >= max_depth) {
       break;
     }
     startingDepth++;
   }
+  console.log(startingDepth);
   
   return principal[JSON.stringify(board)]
 }

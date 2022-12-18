@@ -33,6 +33,6 @@ function handleMouseDown(e){
 canvas.addEventListener("mousedown", handleMouseDown, false);
 
 function ai_make_move() {
-  board.make_move(get_best_move(board, 10, 9));
+  board.make_move(get_best_move(board, 3, 20));
   board.print();
 }
