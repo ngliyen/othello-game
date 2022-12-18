@@ -42,10 +42,62 @@ class OthelloBoard {
     }
   }
 
-  gen_moves() {
+  gen_moves(player) {
+    var legal_moves = []
+    // not valid if already filled
+    for(let i=0; i<this.board[0].length; i++) {
+        for(let j=0; j<this.board.length; j++) {
+            if(this.board[i][j] == EMPTY) {
+                if(this.is_legal_move(player, i, j)) {
+                    legal_moves.push([i, j])
+                }
+            }
+        }
+    }
+    console.log(legal_moves)
+  }
+
+  is_legal_move(player, i, j) {
+    var num_rows = this.board.length
+    var num_cols = this.board[0].length
+    var dir_arr = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]]
+    for (let idx=0; idx<dir_arr.length; idx++) {
+      var dir = dir_arr[idx]
+      var end_col = i + dir[0]
+      var end_row = j + dir[1]
+      var player_found = false
+      while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+          if (this.board[end_col][end_row] == player) {
+              player_found = true
+          } else if (this.board[end_col][end_row] == EMPTY) {
+              break
+          }
+          else {
+              end_col += dir[0]
+              end_row += dir[1]
+          }
+      }
+      if (player_found) {
+//          console.log("Player found! end: " + end_row + ", " + end_col + "dir= " + dir)
+          var end_col = i + dir[0]
+          var end_row = j + dir[1]
+          var player_found = false
+          var flipped = false
+          while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+              if (this.board[end_col][end_row] == this.curplayer) {
+                  player_found = true
+              }
+              else {
+                  return true
+              }
+          }
+      }
+    }
+    return false
   }
 
   make_move(player, i, j) {
+    this.gen_moves(player)
     var num_rows = this.board.length
     var num_cols = this.board[0].length
     this.board[i][j] = player
@@ -91,7 +143,6 @@ class OthelloBoard {
             end_col += dir[0]
             end_row += dir[1]
         }
-        console.log("While loop: " + end_row + ", " + end_col)
     }
   }
 
