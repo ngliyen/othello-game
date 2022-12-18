@@ -102,6 +102,10 @@ class TicTacToeBoard {
     return this.curplayer;
   }
 
+  approx_score(player) {
+    return this.final_score(player);
+  }
+
   final_score(player) {
     if (this.game_ended == EMPTY) {
       return 0;

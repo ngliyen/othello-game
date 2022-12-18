@@ -4,16 +4,23 @@ var endTime = 0;
 function alpha_beta(alpha, beta, depthLeft, board, first_level) {
   var moves = board.gen_moves();
   var best_move = null;
+  curplayer = board.get_curplayer();
   if(depthLeft == 0 || moves.length ==0 ) {
     //console.log("score");
     //console.log(board);
-    var score = board.final_score(board.curplayer);
+    var score = null;
+    score = board.approx_score(curplayer);
     //console.log(score);
     return score;
   }
   let m = JSON.stringify(board);
-  if (m in principal) {
-    moves.unshift(principal[m]);
+
+  moves.map(value=> ({ value, sort: value in principal ? 1000 : board.approx_score(curplayer) }))
+      .sort((a, b) => b.sort - a.sort)
+      .map(({ value }) => value)
+
+  if (first_level) {
+    console.log(moves)
   }
 
   for (var i = 0;i < moves.length; ++i) {
@@ -43,14 +50,17 @@ function alpha_beta(alpha, beta, depthLeft, board, first_level) {
   return alpha;
 }
 
-function get_best_move(board) {
+function get_best_move(board, timeoutsec, max_depth) {
   var date = new Date();
-  endTime = date.getTime() + 10000;
+  endTime = date.getTime() + timeoutsec * 1000;
 
   var startingDepth = 4;
 
   while (new Date().getTime() <= endTime) {
-    alpha_beta(-10000,10000, startingDepth, board,false);
+    alpha_beta(-10000,10000, startingDepth, board,true);
+    if (startingDepth >= max_depth) {
+      break;
+    }
     startingDepth++;
   }
   
