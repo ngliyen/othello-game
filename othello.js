@@ -79,7 +79,7 @@ class OthelloBoard {
       var end_col = i + dir[0]
       var end_row = j + dir[1]
       var player_found = false
-      while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+      while (end_row >= 0 && end_row < num_rows && end_col >= 0 &&  end_col < num_cols && !player_found) {
           if (this.board[end_col][end_row] == player) {
               player_found = true
           } else if (this.board[end_col][end_row] == EMPTY) {
@@ -96,7 +96,7 @@ class OthelloBoard {
           var end_row = j + dir[1]
           var player_found = false
           var flipped = false
-          while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+          while (end_row >= 0 && end_row < num_rows && end_col >= 0 &&  end_col < num_cols && !player_found) {
               if (this.board[end_col][end_row] == this.curplayer) {
                   player_found = true
               }
@@ -122,7 +122,7 @@ class OthelloBoard {
         var end_col = i + dir[0]
         var end_row = j + dir[1]
         var player_found = false
-        while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+        while (end_row >= 0 && end_row < num_rows && end_col >= 0 &&  end_col < num_cols && !player_found) {
             if (this.board[end_col][end_row] == player) {
                 player_found = true
             } else if (this.board[end_col][end_row] == EMPTY) {
@@ -147,7 +147,7 @@ class OthelloBoard {
     var end_col = start_col + dir[0]
     var end_row = start_row + dir[1]
     var player_found = false
-    while (end_row >= 0 && end_row < num_rows && end_col > 0 &&  end_col < num_cols && !player_found) {
+    while (end_row >= 0 && end_row < num_rows && end_col >= 0 &&  end_col < num_cols && !player_found) {
         if (this.board[end_col][end_row] == this.curplayer) {
             player_found = true
         }
