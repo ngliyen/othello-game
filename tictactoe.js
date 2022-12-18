@@ -3,6 +3,8 @@
 const BLACK = 1;
 const WHITE = -1;
 const EMPTY = 0;
+var BOARDSIZE = 3;
+var SQUARESIZE = 30;
 class TicTacToeMove {
   constructor(x, y) {
     this.x = x;
@@ -11,10 +13,10 @@ class TicTacToeMove {
 }
 class TicTacToeBoard {
   constructor() {
-    this.board = new Array(3);
-    for (var i = 0; i< 3; ++i) {
-      this.board[i] = new Array(3)
-      for (var j = 0; j< 3; ++j) {
+    this.board = new Array(BOARDSIZE);
+    for (var i = 0; i< BOARDSIZE; ++i) {
+      this.board[i] = new Array(BOARDSIZE)
+      for (var j = 0; j< BOARDSIZE; ++j) {
         this.board[i][j] = EMPTY;
       }
     }
@@ -23,15 +25,24 @@ class TicTacToeBoard {
   }
 
   print() {
-    var board = document.getElementById("board");
-    var boardBody = "";
+    var canvas = document.getElementById("board");
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'green';
+
     for (var i = 0; i < this.board.length; i++) {
        for (var j = 0; j < this.board[0].length; j++) {
-         boardBody += this.board[i][j];
+         ctx.clearRect(i*SQUARESIZE, j*SQUARESIZE, SQUARESIZE, SQUARESIZE);
+         ctx.strokeRect(i*SQUARESIZE, j*SQUARESIZE, SQUARESIZE, SQUARESIZE);
+         if (this.board[i][j] == BLACK){
+           ctx.fillStyle = 'black';
+           ctx.fillRect(i*SQUARESIZE + 5, j*SQUARESIZE + 5, SQUARESIZE - 10, SQUARESIZE - 10);
+         }
+         if (this.board[i][j] == WHITE){
+           ctx.fillStyle = 'grey';
+           ctx.fillRect(i*SQUARESIZE + 5, j*SQUARESIZE + 5, SQUARESIZE - 10, SQUARESIZE - 10);
+         }
        }
-       boardBody += "<br>";
     }
-    board.innerHTML = boardBody;
   }
 
   clone() {
