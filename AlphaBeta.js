@@ -1,4 +1,5 @@
 var principal = {}
+var endTime = 0;
 
 function alpha_beta(alpha, beta, depthLeft, board, first_level) {
   var moves = board.gen_moves();
@@ -14,8 +15,6 @@ function alpha_beta(alpha, beta, depthLeft, board, first_level) {
   if (m in principal) {
     moves.unshift(principal[m]);
   }
-
-
 
   for (var i = 0;i < moves.length; ++i) {
     var move = moves[i];
@@ -45,6 +44,15 @@ function alpha_beta(alpha, beta, depthLeft, board, first_level) {
 }
 
 function get_best_move(board) {
-  alpha_beta(-10000,10000,9, board,false);
+  var date = new Date();
+  endTime = date.getTime() + 10000;
+
+  var startingDepth = 4;
+
+  while (new Date().getTime() <= endTime) {
+    alpha_beta(-10000,10000, startingDepth, board,false);
+    startingDepth++;
+  }
+  
   return principal[JSON.stringify(board)]
 }
